@@ -59,12 +59,15 @@
 <body>
 <header>
   <h1>TDS Copilot <span class="muted">prototype</span></h1>
-  <p>The AI proposes a TDS section with citations. Code computes the amount. A human approves. Synthetic data only, not tax advice.</p>
+  <p>The AI proposes a TDS section with citations. Code computes the amount. A human approves.
+     Synthetic data only, not tax advice. <b>Do not paste real invoices or PANs.</b>
+     · <a href="https://github.com/Om-Singh-Rawat/tds-copilot" target="_blank" rel="noopener">source &amp; README</a></p>
 </header>
 <main>
   <section>
     <div class="card">
       <h2>Invoice</h2>
+      <p class="muted" style="margin-top:0">Pick a sample (T01–T27) or edit the JSON. Saved model answers are replayed at no cost; anything else needs the server's API key, and the keyword baseline always works.</p>
       <label>Sample invoice</label>
       <select id="caseSel"></select>
       <div class="row">
@@ -78,7 +81,7 @@
       <div class="row" style="margin-top:10px"><button class="primary" id="runBtn">Classify &amp; compute</button></div>
       <p class="muted" id="llmStatus"></p>
     </div>
-    <div class="card">
+    <div class="card" id="auditCard">
       <h2>Audit trail <button id="auditBtn" style="float:right;padding:2px 8px">refresh</button></h2>
       <div id="audit" class="scroll muted">-</div>
     </div>
@@ -110,17 +113,18 @@ const inr = n => n == null ? "not computed" : "Rs " + Number(n).toLocaleString("
 async function api(path, body) {
   const r = await fetch(path, body ? {method: "POST", headers: {"Content-Type": "application/json"}, body: JSON.stringify(body)} : {});
   const j = await r.json();
-  if (j && j.error) throw new Error(j.error);
+  if (j && j.error) throw new Error(j.error + (j.details && j.details.length ? ": " + j.details.join("; ") : ""));
   return j;
 }
 
 async function init() {
-  META = await api("/api/cases");
+  META = await api("/api/meta");
   $("caseSel").innerHTML = META.cases.map(c => `<option value="${c.id}">${c.id} - ${esc(c.tag)}</option>`).join("");
   $("caseSel").onchange = loadCase;
-  $("llmStatus").textContent = META.llm_configured
-    ? `LLM: ${META.model} via OpenRouter`
-    : "No OPENROUTER_API_KEY set: AI mode will route everything to review. Use the keyword baseline or add a key to .env.";
+  $("llmStatus").textContent = !META.llm_configured || !META.live_llm
+    ? `LLM: ${META.model} - cached answers only on this server. Edited invoices without a saved answer go to review; the keyword baseline always works.`
+    : `LLM: ${META.model} via OpenRouter (live; free tier is rate-limited).`;
+  if (META.public) $("auditCard").hidden = true;
   loadCase(); refreshAudit();
 }
 function loadCase() {
@@ -184,15 +188,19 @@ function chosenCodes() { return [...document.querySelectorAll("#overrides select
 async function approve() {
   const codes = chosenCodes();
   const changed = codes.some((c, i) => c !== LAST.classifications[i].code);
-  if (changed) { await run("human", codes); }
-  const res = await api("/api/decision", {audit_id: LAST.audit_id, action: changed ? "override" : "approve",
-    codes, tds_total: LAST.tds_total, reviewer: $("reviewer").value, note: $("note").value});
-  $("decisionMsg").textContent = `Recorded ${changed ? "override" : "approval"} (record ${res.record_id}).`;
+  try {
+    if (changed) { await run("human", codes); }
+    const res = await api("/api/decision", {audit_id: LAST.audit_id, action: changed ? "override" : "approve",
+      codes, tds_total: LAST.tds_total, reviewer: $("reviewer").value, note: $("note").value});
+    $("decisionMsg").textContent = `Recorded ${changed ? "override" : "approval"} (record ${res.record_id}).`;
+  } catch (e) { $("decisionMsg").textContent = "Could not record decision: " + e.message; }
   refreshAudit();
 }
 
 async function refreshAudit() {
-  const rows = await api("/api/audit");
+  if (META && META.public) return;
+  let rows;
+  try { rows = await api("/api/audit"); } catch (e) { $("audit").textContent = e.message; return; }
   $("audit").innerHTML = rows.length ? `<table>${rows.map(r => `<tr><td>${esc(r.ts.slice(11, 19))}</td><td>${esc(r.event)}</td>
     <td>${esc(r.invoice_no ?? r.action ?? "")}</td><td>${esc(r.route ?? (r.final_codes || []).join(","))}</td><td>${esc(r.record_id)}</td></tr>`).join("")}</table>` : "empty";
 }

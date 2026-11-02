@@ -1,0 +1,21 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "tds-copilot"
+version = "0.2.0"
+description = "AI-assisted TDS section classification for Indian vendor payments: retrieval-grounded LLM + deterministic tax engine + human review"
+readme = "README.md"
+requires-python = ">=3.10"
+authors = [{ name = "Om Singh Rawat" }]
+dependencies = []  # standard library only
+
+[project.scripts]
+tds = "tds.cli:main"
+
+[tool.setuptools]
+packages = ["tds"]
+
+[tool.setuptools.package-data]
+tds = ["static/*.html"]

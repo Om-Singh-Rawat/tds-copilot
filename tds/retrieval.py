@@ -1,6 +1,6 @@
 """BM25 retrieval over the knowledge base (pure Python, no vector DB).
 
-With ~20 chunks you could put everything in the prompt; retrieval is kept so
+With 23 chunks you could put everything in the prompt; retrieval is kept so
 the design scales to the full Act plus circulars, and so each answer records
 exactly which source passages the model was shown.
 """

@@ -1,0 +1,8 @@
+.env
+.git
+audit/
+**/__pycache__
+eval/
+tests/
+docs/
+.cache/test_audit.jsonl

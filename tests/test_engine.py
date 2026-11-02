@@ -1,19 +1,17 @@
-import json
 import unittest
 from datetime import date
 
-from tds import config, engine, pan
-from tds.pipeline import ledger, vendors
+from tds import data, engine, pan
 from tds.rules import financial_year, rule_set_for
 
-CASES = {c["id"]: c for c in json.loads(config.TEST_CASES_PATH.read_text(encoding="utf-8"))["cases"]}
+CASES = {c["id"]: c for c in data.test_cases()}
 RS = rule_set_for(date(2025, 6, 1))
 
 
 def run(case_id, codes=None, vendor_patch=None, invoice_patch=None):
     inv = dict(CASES[case_id]["invoice"], **(invoice_patch or {}))
-    v = dict(vendors()[inv["vendor_id"]], **(vendor_patch or {}))
-    return engine.compute(inv, codes or CASES[case_id]["expected"]["lines"], v, ledger(), RS)
+    v = dict(data.vendors()[inv["vendor_id"]], **(vendor_patch or {}))
+    return engine.compute(inv, codes or CASES[case_id]["expected"]["lines"], v, data.ledger(), RS)
 
 
 class RuleSetTests(unittest.TestCase):

@@ -1,0 +1,52 @@
+name: tests
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.10", "3.12"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Unit tests (offline, stubbed LLM)
+        run: python -m unittest discover -s tests -t . -v
+      - name: Install as a package and use the console script
+        run: |
+          pip install -e .
+          tds run --case T16 --mode baseline
+      - name: Keyword-baseline evaluation
+        run: python -m tds eval --mode baseline
+      - name: Replay the recorded LLM run offline (KB v1 + cached answers, no API key)
+        env:
+          TDS_LIVE_LLM: "0"
+          TDS_KB_PATH: data/knowledge/archive/kb-v1.json
+        run: |
+          python -m tds eval --mode llm --cases $(echo T{01..26} | tr ' ' ',') --out /tmp/replay | tee replay.txt
+          grep -q '"errors": 0' replay.txt
+          grep -q '"unsafe_auto": 0' replay.txt
+
+  docker:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build image
+        run: docker build -t tds-copilot .
+      - name: Run container and probe the API
+        run: |
+          docker run -d -p 8080:8080 --name tds tds-copilot
+          for i in $(seq 1 30); do curl -fs localhost:8080/healthz && break; sleep 1; done
+          curl -fs localhost:8080/ | grep -q "TDS Copilot"
+          curl -fs -X POST localhost:8080/api/run -H 'Content-Type: application/json' \
+            -d '{"mode":"baseline","invoice":{"vendor_id":"V001","date":"2025-06-30","lines":[{"description":"Security guard services","taxable_value":120000,"gst":21600}]}}' \
+            | grep -q '"tds_total": 2400'
+          test "$(curl -s -o /dev/null -w '%{http_code}' localhost:8080/api/audit)" = "403"
+      - name: Container logs
+        if: always()
+        run: docker logs tds

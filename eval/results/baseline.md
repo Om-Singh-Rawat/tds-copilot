@@ -1,16 +1,16 @@
 # Eval: mode=baseline
-_Run 2026-11-03 01:48_
+_Run 2026-11-03 02:35_
 
 | metric | value |
 |---|---|
-| cases | 26 |
-| section accuracy (grey areas accept any listed option) | 69% |
-| strict section accuracy | 58% |
+| cases | 27 |
+| section accuracy (grey areas accept any listed option) | 70% |
+| strict section accuracy | 56% |
 | TDS amount accuracy (cases with an expected amount) | 62% |
 | route accuracy | 81% |
 | **unsafe auto-suggestions** (auto + wrong) | **1** |
 | missed reviews (should have gone to a human, went auto) | 2 |
-| review rate | 50% |
+| review rate | 52% |
 | classifier errors | 0 |
 
 | id | case | expected | got | sec | TDS exp/got | route exp/got | reasons |
@@ -41,3 +41,4 @@ _Run 2026-11-03 01:48_
 | T24 | STRESS abbreviations | 194J_B | UNSURE | ❌ | 6000 / None ❌ | auto / review ❌ | unsure |
 | T25 | STRESS vendor type misleads (job work with our material) | 194C | UNSURE | ❌ | 1200 / None ❌ | any / review ✅ | unsure |
 | T26 | STRESS commission vs discount | NO_TDS | UNSURE | ✅ | None / None - | review / review ✅ | unsure |
+| T27 | recruitment agency (Circular 715 Q.12) | 194J_A | UNSURE | ✅ | None / None - | any / review ✅ | unsure |

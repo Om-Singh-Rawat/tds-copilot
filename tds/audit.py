@@ -2,11 +2,13 @@
 which rule set computed the number, and what the human decided."""
 import hashlib
 import json
+import threading
 from datetime import datetime, timezone
 
 from .config import AUDIT_DIR
 
 LOG = AUDIT_DIR / "audit_log.jsonl"
+_lock = threading.Lock()  # the web server is multi-threaded
 
 
 def _now() -> str:
@@ -18,9 +20,19 @@ def fingerprint(obj) -> str:
 
 
 def write(event: str, payload: dict) -> str:
-    AUDIT_DIR.mkdir(parents=True, exist_ok=True)
     record = {"ts": _now(), "event": event, **payload}
     record["record_id"] = fingerprint(record)
-    with LOG.open("a", encoding="utf-8") as f:
-        f.write(json.dumps(record, ensure_ascii=False, default=str) + "\n")
+    with _lock:
+        AUDIT_DIR.mkdir(parents=True, exist_ok=True)
+        with LOG.open("a", encoding="utf-8") as f:
+            f.write(json.dumps(record, ensure_ascii=False, default=str) + "\n")
     return record["record_id"]
+
+
+def recent(limit: int = 30) -> list[dict]:
+    """Most recent records first."""
+    if not LOG.exists():
+        return []
+    with _lock:
+        lines = LOG.read_text(encoding="utf-8").splitlines()[-limit:]
+    return [json.loads(l) for l in reversed(lines)]

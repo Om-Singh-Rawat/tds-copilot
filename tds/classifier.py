@@ -109,10 +109,33 @@ def classify(invoice: dict, vendor: dict, sources: list[dict], samples: int = 1,
 
     final, agreement = [], []
     for i in range(len(invoice["lines"])):
-        votes = Counter(r[i]["code"] for r in runs)
-        code, n = votes.most_common(1)[0]
-        chosen = next(r[i] for r in runs if r[i]["code"] == code)
-        final.append(chosen)
+        code, n = Counter(r[i]["code"] for r in runs).most_common(1)[0]
+        final.append(aggregate_line([r[i] for r in runs], code))
         agreement.append(n / samples)
     return {"lines": final, "agreement": agreement, "raw": raws, "model": used_model,
             "prompt": messages}
+
+
+def aggregate_line(samples: list[dict], code: str) -> dict:
+    """Merge one line's answers across samples.
+
+    The first evaluation showed the code is stable across samples but the
+    ambiguity flags are not, so a flag (and 'low' confidence) only counts when a
+    majority of samples raise it. With one sample everything is kept (flags are
+    reduced to their category, e.g. "other: ..." -> "other").
+    """
+    agreeing = [s for s in samples if s["code"] == code]
+    majority = len(samples) / 2
+    flag_votes = Counter(f for s in samples for f in dict.fromkeys(_flag_key(x) for x in s["ambiguity_flags"]))
+    flags = [f for f, v in flag_votes.items() if v > majority]
+    low_votes = sum(s["confidence"] == "low" for s in samples)
+    confidence = "low" if low_votes > majority else Counter(s["confidence"] for s in agreeing).most_common(1)[0][0]
+    if confidence == "low" and low_votes <= majority:
+        confidence = "medium"
+    citations = list(dict.fromkeys(c for s in agreeing for c in s["citations"]))
+    return dict(agreeing[0], ambiguity_flags=flags, confidence=confidence, citations=citations)
+
+
+def _flag_key(flag: str) -> str:
+    # "other: free text" varies run to run; vote on the category only
+    return flag.split(":", 1)[0].strip().lower()

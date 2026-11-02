@@ -3,10 +3,10 @@ that the guardrails catch bad model output."""
 import json
 import unittest
 
-from tds import config
+from tds import config, data
 from tds.pipeline import process
 
-CASES = {c["id"]: c["invoice"] for c in json.loads(config.TEST_CASES_PATH.read_text(encoding="utf-8"))["cases"]}
+CASES = {c["id"]: c["invoice"] for c in data.test_cases()}
 
 
 def stub(lines: list[dict] | str, model: str = "stub-model"):
@@ -60,7 +60,7 @@ class PipelineTests(unittest.TestCase):
         self.assertIn("unsure", reasons(r))
 
     def test_practice_only_goes_to_review(self):
-        r = self.go("T13", stub([line("194J_A", ["kb-software-amc"])]))
+        r = self.go("T04", stub([line("194I_A", ["kb-equipment-hire"])]))
         self.assertIn("practice_only", reasons(r))
 
     def test_baseline_disagreement(self):

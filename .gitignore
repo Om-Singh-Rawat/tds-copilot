@@ -3,3 +3,6 @@ __pycache__/
 *.pyc
 audit/
 .venv/
+.cache/test_audit.jsonl
+*.egg-info/
+build/
