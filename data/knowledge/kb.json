@@ -1,0 +1,182 @@
+{
+  "kb_version": "kb-2025-26-v1",
+  "disclaimer": "These are short PARAPHRASES written for this prototype, not official text. Each chunk names the provision it summarises; verify against the bare Act / CBDT circular on incometaxindia.gov.in before relying on it.",
+  "chunks": [
+    {
+      "id": "kb-194C-scope",
+      "title": "Section 194C - meaning of 'work'",
+      "authority": "statute",
+      "source": "Income-tax Act 1961, s.194C, Explanation (iv)",
+      "applies_to": ["194C"],
+      "text": "Any person responsible for paying a resident contractor for carrying out any work, including supply of labour for carrying out any work, under a contract must deduct tax. 'Work' includes advertising; broadcasting and telecasting including production of programmes; carriage of goods or passengers by any mode of transport other than railways; catering; and manufacturing or supplying a product according to the requirement or specification of a customer by using material purchased from that customer. It does not include manufacturing or supplying a product to customer specification using material purchased from a person other than the customer."
+    },
+    {
+      "id": "kb-194C-rate",
+      "title": "Section 194C - rate and threshold",
+      "authority": "statute",
+      "source": "Income-tax Act 1961, s.194C(1) and (5)",
+      "applies_to": ["194C"],
+      "text": "Rate: 1% where the payee is an individual or HUF, 2% in any other case. No deduction where a single payment does not exceed Rs 30,000, unless the aggregate paid or credited to the contractor during the financial year exceeds Rs 1,00,000. Once the aggregate limit is crossed, tax is deducted on the aggregate amount."
+    },
+    {
+      "id": "kb-194C-transport",
+      "title": "Section 194C(6) - transporters",
+      "authority": "statute",
+      "source": "Income-tax Act 1961, s.194C(6)",
+      "applies_to": ["194C"],
+      "text": "No deduction is made from payments to a contractor engaged in plying, hiring or leasing goods carriages who owns ten or fewer goods carriages at any time during the year and furnishes a declaration to that effect together with his PAN."
+    },
+    {
+      "id": "kb-circ715-advertising",
+      "title": "CBDT Circular 715 - advertising agencies",
+      "authority": "circular",
+      "source": "CBDT Circular No. 715 dated 8 August 1995, Q.1-Q.2",
+      "applies_to": ["194C", "194J_B"],
+      "text": "Payments made to an advertising agency for advertising (for example release of advertisements in newspapers, television or other media) are covered by s.194C as 'work'. Payments made by the agency to the media are also covered by s.194C. Payments to models, artists, photographers and similar persons for their professional services are covered by s.194J."
+    },
+    {
+      "id": "kb-circ715-labour",
+      "title": "CBDT Circular 715 - supply of labour / manpower and service contracts",
+      "authority": "circular",
+      "source": "CBDT Circular No. 715 dated 8 August 1995; s.194C Explanation",
+      "applies_to": ["194C"],
+      "text": "Contracts for supply of labour, manpower or staff to carry out work (for example security guards, housekeeping, data entry operators supplied on contract) are covered by s.194C. Routine service contracts such as cleaning, housekeeping, courier, and repair work done by a contractor are generally treated as 'work' under s.194C."
+    },
+    {
+      "id": "kb-circ715-transport-hire",
+      "title": "Hire of vehicles with driver",
+      "authority": "circular",
+      "source": "CBDT Circular No. 715 dated 8 August 1995; s.194C Explanation (iv)(c)",
+      "applies_to": ["194C"],
+      "text": "Hiring of vehicles together with the driver for carriage of goods or passengers (for example freight, cab or bus services) is carriage by road and falls under s.194C."
+    },
+    {
+      "id": "kb-goods",
+      "title": "Purchase of goods is not 'work'",
+      "authority": "statute",
+      "source": "Income-tax Act 1961, s.194C Explanation (iv) (exclusion); general principle on contracts for sale",
+      "applies_to": ["NO_TDS"],
+      "text": "A contract for the sale or purchase of goods (for example buying standard products, stationery, spare parts or equipment off the shelf) is not a contract for 'work' and does not attract s.194C. Where one invoice combines supply of goods with a separately priced service such as installation, the service portion is examined on its own. Purchases of goods by large buyers can attract s.194Q, which this prototype treats as out of scope."
+    },
+    {
+      "id": "kb-194H",
+      "title": "Section 194H - commission or brokerage",
+      "authority": "statute",
+      "source": "Income-tax Act 1961, s.194H as amended by Finance (No.2) Act 2024 and Finance Act 2025",
+      "applies_to": ["194H"],
+      "text": "Commission or brokerage includes any payment received by a person acting on behalf of another for services rendered (not professional services) or for buying or selling goods or in relation to any transaction relating to any asset, valuable article or thing, other than securities. Insurance commission is covered separately by s.194D. Rate 2% (from 1 October 2024). No deduction where the aggregate in the financial year does not exceed Rs 20,000 (limit from 1 April 2025)."
+    },
+    {
+      "id": "kb-194H-discount",
+      "title": "Trade discount vs commission",
+      "authority": "practice",
+      "source": "Judicial principle - principal-to-principal relationship (fact dependent)",
+      "applies_to": ["194H", "NO_TDS"],
+      "text": "A discount or margin allowed to a distributor who buys and resells goods on a principal-to-principal basis is generally not commission, because the distributor is not acting on behalf of the seller. Where the agent acts on behalf of the principal, the payment is commission. This depends on the agreement and is a judgment area."
+    },
+    {
+      "id": "kb-194I",
+      "title": "Section 194-I - rent",
+      "authority": "statute",
+      "source": "Income-tax Act 1961, s.194-I as amended by Finance Act 2025",
+      "applies_to": ["194I_A", "194I_B"],
+      "text": "Rent means any payment under any lease, sub-lease, tenancy or other agreement or arrangement for the use of (a) land, (b) building including factory building, (c) land appurtenant to a building, (d) machinery, (e) plant, (f) equipment, (g) furniture or (h) fittings, whether or not owned by the payee. Rate: 2% for use of plant, machinery or equipment; 10% for land, building, furniture or fittings. From 1 April 2025 no deduction where the rent for a month or part of a month does not exceed Rs 50,000."
+    },
+    {
+      "id": "kb-circ715-hotel",
+      "title": "CBDT Circular 715 - hotel rooms on regular basis",
+      "authority": "circular",
+      "source": "CBDT Circular No. 715 dated 8 August 1995, Q.20",
+      "applies_to": ["194I_B"],
+      "text": "Where rooms in a hotel are hired on a regular basis (for example under an annual or long-term arrangement), the payment is rent for s.194-I. Occasional bookings by different persons at normal tariff are not treated as rent."
+    },
+    {
+      "id": "kb-equipment-hire",
+      "title": "Hire of machinery or equipment without operator",
+      "authority": "practice",
+      "source": "s.194-I definition of rent read with s.194C (common practice)",
+      "applies_to": ["194I_A", "194C"],
+      "text": "Taking machinery or equipment (for example a DG set, crane or earth mover) on hire for the hirer's own use, without the supplier performing work, is generally treated as rent for plant or machinery under s.194-I. Where the supplier provides the equipment with an operator and carries out the work, the contract is commonly treated as a work contract under s.194C. Fact dependent."
+    },
+    {
+      "id": "kb-194J-prof",
+      "title": "Section 194J - professional services, royalty, non-compete",
+      "authority": "statute",
+      "source": "Income-tax Act 1961, s.194J and Explanation (a)",
+      "applies_to": ["194J_B"],
+      "text": "Professional services means services rendered in the course of carrying on legal, medical, engineering or architectural profession, the profession of accountancy, technical consultancy, interior decoration or advertising, or any other profession notified by the Board (for example company secretaries, film artists, sports persons, event managers, anchors). Fees for professional services, royalty (other than film royalty) and non-compete fees attract deduction at 10%."
+    },
+    {
+      "id": "kb-194J-fts",
+      "title": "Section 194J - fees for technical services",
+      "authority": "statute",
+      "source": "Income-tax Act 1961, s.194J(1)(b) read with Explanation 2 to s.9(1)(vii); rate amended from 1 April 2020",
+      "applies_to": ["194J_A"],
+      "text": "Fees for technical services means consideration for rendering managerial, technical or consultancy services, including providing the services of technical or other personnel, but not consideration for construction, assembly, mining or similar projects, and not salary. Fees for technical services (other than professional services), payments to call centre operators and royalty for sale, distribution or exhibition of films attract deduction at 2%."
+    },
+    {
+      "id": "kb-194J-threshold",
+      "title": "Section 194J - threshold",
+      "authority": "statute",
+      "source": "Income-tax Act 1961, s.194J(1) proviso as amended by Finance Act 2025",
+      "applies_to": ["194J_A", "194J_B"],
+      "text": "No deduction where the amount of fees for professional services, fees for technical services, royalty or non-compete fees paid or credited during the financial year does not exceed Rs 50,000 for each category separately (limit from 1 April 2025). There is no threshold for remuneration, fees or commission to a director."
+    },
+    {
+      "id": "kb-194J-director",
+      "title": "Section 194J(1)(ba) - director's fees",
+      "authority": "statute",
+      "source": "Income-tax Act 1961, s.194J(1)(ba)",
+      "applies_to": ["194J_DIRECTOR"],
+      "text": "Any remuneration, fees or commission (other than salary on which tax is deducted under s.192) paid to a director of a company, such as sitting fees for board meetings, attracts deduction at 10% with no threshold."
+    },
+    {
+      "id": "kb-software-amc",
+      "title": "Software licences and maintenance / support contracts",
+      "authority": "practice",
+      "source": "s.194J royalty / fees for technical services; Notification 21/2012; s.194C (fact dependent)",
+      "applies_to": ["194J_A", "194J_B", "194C", "NO_TDS"],
+      "text": "Purchase of off-the-shelf software may be royalty under s.194J, but Notification 21/2012 exempts the buyer where the software is acquired without modification, tax was deducted earlier in the chain and a declaration is furnished. Annual maintenance contracts are fact dependent: repair and upkeep of equipment is commonly treated as work under s.194C, while support requiring technical expertise (configuration, troubleshooting, upgrades) is commonly treated as fees for technical services under s.194J. This is a recognised grey area."
+    },
+    {
+      "id": "kb-reimbursement",
+      "title": "Reimbursement of expenses",
+      "authority": "circular",
+      "source": "CBDT Circular No. 715 dated 8 August 1995, Q.30; later judicial decisions",
+      "applies_to": ["194C", "194J_A", "194J_B"],
+      "text": "Where reimbursement of expenses is included in the bill of a contractor or professional, the circular view is that tax is deducted on the gross amount including the reimbursement. Where actual expenses are billed separately without any mark-up, several judicial decisions have held that no TDS is required on that part. This is a judgment area."
+    },
+    {
+      "id": "kb-circ23-2017-gst",
+      "title": "CBDT Circular 23/2017 - GST component",
+      "authority": "circular",
+      "source": "CBDT Circular No. 23/2017 dated 19 July 2017",
+      "applies_to": ["194C", "194H", "194I_A", "194I_B", "194J_A", "194J_B", "194J_DIRECTOR"],
+      "text": "Where the GST component is indicated separately in the agreement or invoice, tax is deducted on the amount excluding GST."
+    },
+    {
+      "id": "kb-206AA",
+      "title": "Section 206AA - PAN not furnished or inoperative",
+      "authority": "statute",
+      "source": "Income-tax Act 1961, s.206AA; Rule 114AAA",
+      "applies_to": ["194C", "194H", "194I_A", "194I_B", "194J_A", "194J_B", "194J_DIRECTOR"],
+      "text": "Where the payee does not furnish PAN, tax is deducted at the higher of the rate specified in the relevant section, the rate in force, or 20%. A PAN that has become inoperative (for example not linked with Aadhaar) is treated as not furnished."
+    },
+    {
+      "id": "kb-out-of-scope",
+      "title": "Payments outside this prototype",
+      "authority": "statute",
+      "source": "Income-tax Act 1961, ss.192, 194A, 194D, 194-IA, 194-IB, 194-O, 194Q, 195",
+      "applies_to": ["OUT_OF_SCOPE"],
+      "text": "Salary (s.192), interest (s.194A), insurance commission (s.194D), purchase of immovable property (s.194-IA), rent paid by certain individuals (s.194-IB), e-commerce operators (s.194-O), purchase of goods by large buyers (s.194Q) and any payment to a non-resident (s.195, often with treaty relief) follow different rules and are outside this prototype."
+    },
+    {
+      "id": "kb-utilities",
+      "title": "Utility bills and statutory charges",
+      "authority": "practice",
+      "source": "General practice",
+      "applies_to": ["NO_TDS"],
+      "text": "Payments for electricity, water and similar utility supplies at standard tariff, and government fees and statutory charges, are generally not treated as payments for work or professional services and no TDS is deducted."
+    }
+  ]
+}

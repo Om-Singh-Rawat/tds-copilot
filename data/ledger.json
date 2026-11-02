@@ -1,0 +1,8 @@
+{
+  "_note": "SYNTHETIC payment history for FY 2025-26, used for annual threshold aggregation. 'base' is the amount on which TDS would be computed (excl. GST).",
+  "payments": [
+    {"vendor_id": "V016", "section": "194C", "date": "2025-04-15", "base": 28000, "tds_deducted": false},
+    {"vendor_id": "V016", "section": "194C", "date": "2025-05-15", "base": 29000, "tds_deducted": false},
+    {"vendor_id": "V001", "section": "194C", "date": "2025-05-05", "base": 120000, "tds_deducted": true}
+  ]
+}

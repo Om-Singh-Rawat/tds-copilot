@@ -1,0 +1,25 @@
+{
+  "_note": "SYNTHETIC vendor master. All names and PANs are made up; PANs only follow the public PAN format.",
+  "vendors": {
+    "V001": {"name": "Shield Security Services Pvt Ltd", "pan": "AAKCS4821M", "pan_operative": true, "resident": true, "nature_of_business": "Security guard and manpower services"},
+    "V002": {"name": "Adv. Meera Iyer", "pan": "AJMPI7342Q", "pan_operative": true, "resident": true, "nature_of_business": "Advocate - legal services"},
+    "V003": {"name": "Rajesh Khanna", "pan": "BKLPK5519D", "pan_operative": true, "resident": true, "nature_of_business": "Individual owner of the office premises let to us"},
+    "V004": {"name": "PowerGen Rentals LLP", "pan": "AAQFP2290L", "pan_operative": true, "resident": true, "nature_of_business": "Rental of diesel generator sets and power equipment"},
+    "V005": {"name": "Sunil Verma", "pan": "CDNPV6631R", "pan_operative": true, "resident": true, "nature_of_business": "Sales agent who books orders on our behalf"},
+    "V006": {"name": "InkWorld Stationers", "pan": "AAMFI3307K", "pan_operative": true, "resident": true, "nature_of_business": "Trader of stationery and printer consumables"},
+    "V007": {"name": "CloudOps Technologies Pvt Ltd", "pan": "AAGCC8854J", "pan_operative": true, "resident": true, "nature_of_business": "Managed cloud infrastructure and IT support"},
+    "V008": {"name": "Dr. Anita Rao", "pan": "ADRPR4410H", "pan_operative": true, "resident": true, "nature_of_business": "Independent director on our board"},
+    "V009": {"name": "Shree Ganesh Roadways", "pan": "BHSPG9021N", "pan_operative": true, "resident": true, "nature_of_business": "Goods transport by truck", "transporter_declaration_194C6": true},
+    "V010": {"name": "Annapurna Caterers", "pan": null, "pan_operative": false, "resident": true, "nature_of_business": "Event catering"},
+    "V011": {"name": "SecureVision Systems Pvt Ltd", "pan": "AACCS7765P", "pan_operative": true, "resident": true, "nature_of_business": "Supplier and installer of CCTV equipment"},
+    "V012": {"name": "BrightAds Media Pvt Ltd", "pan": "AABCB3398E", "pan_operative": true, "resident": true, "nature_of_business": "Advertising agency"},
+    "V013": {"name": "LedgerSoft Solutions Pvt Ltd", "pan": "AAECL5576G", "pan_operative": true, "resident": true, "nature_of_business": "Accounting software vendor"},
+    "V014": {"name": "Hotel Grand Residency Pvt Ltd", "pan": "AAFCH1123B", "pan_operative": true, "resident": true, "nature_of_business": "Hotel"},
+    "V015": {"name": "Kapoor & Associates", "pan": "AAJFK6648C", "pan_operative": true, "resident": true, "nature_of_business": "Chartered accountants"},
+    "V016": {"name": "CleanPro Facility Services Pvt Ltd", "pan": "AADCC2209F", "pan_operative": true, "resident": true, "nature_of_business": "Office housekeeping services"},
+    "V017": {"name": "John Smith Consulting LLC", "pan": null, "pan_operative": false, "resident": false, "nature_of_business": "US-based management consultant"},
+    "V018": {"name": "R. Mehta", "pan": "AFGPM3381T", "pan_operative": true, "resident": true, "nature_of_business": ""},
+    "V019": {"name": "DataServe Staffing Pvt Ltd", "pan": "AAHCD4452S", "pan_operative": true, "resident": true, "nature_of_business": "Staffing and manpower supply"},
+    "V020": {"name": "Prakash Interiors", "pan": "AKRPP8812E", "pan_operative": false, "resident": true, "nature_of_business": "Interior decoration and design"}
+  }
+}

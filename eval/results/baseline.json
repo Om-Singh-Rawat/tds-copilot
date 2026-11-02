@@ -1,0 +1,589 @@
+{
+  "summary": {
+    "cases": 26,
+    "section_acc": 0.6923076923076923,
+    "strict_section_acc": 0.5769230769230769,
+    "tds_acc": 0.6190476190476191,
+    "route_acc": 0.8076923076923077,
+    "unsafe_auto": 1,
+    "missed_review": 2,
+    "review_rate": 0.5,
+    "errors": 0
+  },
+  "rows": [
+    {
+      "id": "T01",
+      "tag": "plain 194C",
+      "expected": [
+        "194C"
+      ],
+      "got": [
+        "194C"
+      ],
+      "exp_tds": 2400,
+      "got_tds": 2400,
+      "exp_route": "auto",
+      "got_route": "auto",
+      "section_ok": true,
+      "strict_ok": true,
+      "tds_ok": true,
+      "route_ok": true,
+      "unsafe_auto": false,
+      "reasons": [],
+      "error": null
+    },
+    {
+      "id": "T02",
+      "tag": "plain 194J professional",
+      "expected": [
+        "194J_B"
+      ],
+      "got": [
+        "194J_B"
+      ],
+      "exp_tds": 7500,
+      "got_tds": 7500,
+      "exp_route": "auto",
+      "got_route": "auto",
+      "section_ok": true,
+      "strict_ok": true,
+      "tds_ok": true,
+      "route_ok": true,
+      "unsafe_auto": false,
+      "reasons": [],
+      "error": null
+    },
+    {
+      "id": "T03",
+      "tag": "rent building",
+      "expected": [
+        "194I_B"
+      ],
+      "got": [
+        "194I_B"
+      ],
+      "exp_tds": 18000,
+      "got_tds": 18000,
+      "exp_route": "auto",
+      "got_route": "auto",
+      "section_ok": true,
+      "strict_ok": true,
+      "tds_ok": true,
+      "route_ok": true,
+      "unsafe_auto": false,
+      "reasons": [],
+      "error": null
+    },
+    {
+      "id": "T04",
+      "tag": "rent machinery",
+      "expected": [
+        "194I_A"
+      ],
+      "got": [
+        "194I_A"
+      ],
+      "exp_tds": 1200,
+      "got_tds": 1200,
+      "exp_route": "auto",
+      "got_route": "auto",
+      "section_ok": true,
+      "strict_ok": true,
+      "tds_ok": true,
+      "route_ok": true,
+      "unsafe_auto": false,
+      "reasons": [],
+      "error": null
+    },
+    {
+      "id": "T05",
+      "tag": "commission",
+      "expected": [
+        "194H"
+      ],
+      "got": [
+        "194H"
+      ],
+      "exp_tds": 500,
+      "got_tds": 500,
+      "exp_route": "auto",
+      "got_route": "auto",
+      "section_ok": true,
+      "strict_ok": true,
+      "tds_ok": true,
+      "route_ok": true,
+      "unsafe_auto": false,
+      "reasons": [],
+      "error": null
+    },
+    {
+      "id": "T06",
+      "tag": "goods - no TDS",
+      "expected": [
+        "NO_TDS"
+      ],
+      "got": [
+        "NO_TDS"
+      ],
+      "exp_tds": 0,
+      "got_tds": 0,
+      "exp_route": "auto",
+      "got_route": "auto",
+      "section_ok": true,
+      "strict_ok": true,
+      "tds_ok": true,
+      "route_ok": true,
+      "unsafe_auto": false,
+      "reasons": [],
+      "error": null
+    },
+    {
+      "id": "T07",
+      "tag": "technical services",
+      "expected": [
+        "194J_A"
+      ],
+      "got": [
+        "194J_A"
+      ],
+      "exp_tds": 1800,
+      "got_tds": 1800,
+      "exp_route": "auto",
+      "got_route": "auto",
+      "section_ok": true,
+      "strict_ok": true,
+      "tds_ok": true,
+      "route_ok": true,
+      "unsafe_auto": false,
+      "reasons": [],
+      "error": null
+    },
+    {
+      "id": "T08",
+      "tag": "director fees, no threshold",
+      "expected": [
+        "194J_DIRECTOR"
+      ],
+      "got": [
+        "194J_DIRECTOR"
+      ],
+      "exp_tds": 2000,
+      "got_tds": 2000,
+      "exp_route": "auto",
+      "got_route": "auto",
+      "section_ok": true,
+      "strict_ok": true,
+      "tds_ok": true,
+      "route_ok": true,
+      "unsafe_auto": false,
+      "reasons": [],
+      "error": null
+    },
+    {
+      "id": "T09",
+      "tag": "transporter exemption 194C(6)",
+      "expected": [
+        "194C"
+      ],
+      "got": [
+        "194C"
+      ],
+      "exp_tds": 0,
+      "got_tds": 0,
+      "exp_route": "auto",
+      "got_route": "auto",
+      "section_ok": true,
+      "strict_ok": true,
+      "tds_ok": true,
+      "route_ok": true,
+      "unsafe_auto": false,
+      "reasons": [],
+      "error": null
+    },
+    {
+      "id": "T10",
+      "tag": "no PAN - 206AA",
+      "expected": [
+        "194C"
+      ],
+      "got": [
+        "194C"
+      ],
+      "exp_tds": 8000,
+      "got_tds": 8000,
+      "exp_route": "review",
+      "got_route": "review",
+      "section_ok": true,
+      "strict_ok": true,
+      "tds_ok": true,
+      "route_ok": true,
+      "unsafe_auto": false,
+      "reasons": [
+        "no_pan"
+      ],
+      "error": null
+    },
+    {
+      "id": "T11",
+      "tag": "mixed invoice goods + service",
+      "expected": [
+        "NO_TDS",
+        "194C"
+      ],
+      "got": [
+        "NO_TDS",
+        "UNSURE"
+      ],
+      "exp_tds": 1000,
+      "got_tds": null,
+      "exp_route": "any",
+      "got_route": "review",
+      "section_ok": false,
+      "strict_ok": false,
+      "tds_ok": false,
+      "route_ok": true,
+      "unsafe_auto": false,
+      "reasons": [
+        "unsure"
+      ],
+      "error": null
+    },
+    {
+      "id": "T12",
+      "tag": "advertising agency (Circular 715)",
+      "expected": [
+        "194C"
+      ],
+      "got": [
+        "194J_B"
+      ],
+      "exp_tds": 5000,
+      "got_tds": 25000,
+      "exp_route": "any",
+      "got_route": "auto",
+      "section_ok": false,
+      "strict_ok": false,
+      "tds_ok": false,
+      "route_ok": true,
+      "unsafe_auto": true,
+      "reasons": [],
+      "error": null
+    },
+    {
+      "id": "T13",
+      "tag": "grey area - software AMC",
+      "expected": [
+        "194J_A"
+      ],
+      "got": [
+        "194C"
+      ],
+      "exp_tds": null,
+      "got_tds": 2400,
+      "exp_route": "review",
+      "got_route": "auto",
+      "section_ok": true,
+      "strict_ok": false,
+      "tds_ok": null,
+      "route_ok": false,
+      "unsafe_auto": false,
+      "reasons": [],
+      "error": null
+    },
+    {
+      "id": "T14",
+      "tag": "hotel rooms on annual arrangement",
+      "expected": [
+        "194I_B"
+      ],
+      "got": [
+        "UNSURE"
+      ],
+      "exp_tds": 72000,
+      "got_tds": null,
+      "exp_route": "auto",
+      "got_route": "review",
+      "section_ok": false,
+      "strict_ok": false,
+      "tds_ok": false,
+      "route_ok": false,
+      "unsafe_auto": false,
+      "reasons": [
+        "unsure"
+      ],
+      "error": null
+    },
+    {
+      "id": "T15",
+      "tag": "below 194J threshold",
+      "expected": [
+        "194J_B"
+      ],
+      "got": [
+        "194J_B"
+      ],
+      "exp_tds": 0,
+      "got_tds": 0,
+      "exp_route": "auto",
+      "got_route": "auto",
+      "section_ok": true,
+      "strict_ok": true,
+      "tds_ok": true,
+      "route_ok": true,
+      "unsafe_auto": false,
+      "reasons": [],
+      "error": null
+    },
+    {
+      "id": "T16",
+      "tag": "194C aggregate crossed - catch-up",
+      "expected": [
+        "194C"
+      ],
+      "got": [
+        "194C"
+      ],
+      "exp_tds": 2040,
+      "got_tds": 2040,
+      "exp_route": "review",
+      "got_route": "review",
+      "section_ok": true,
+      "strict_ok": true,
+      "tds_ok": true,
+      "route_ok": true,
+      "unsafe_auto": false,
+      "reasons": [
+        "catch_up"
+      ],
+      "error": null
+    },
+    {
+      "id": "T17",
+      "tag": "date outside verified rule set",
+      "expected": [
+        "194C"
+      ],
+      "got": [
+        "194C"
+      ],
+      "exp_tds": null,
+      "got_tds": null,
+      "exp_route": "review",
+      "got_route": "review",
+      "section_ok": true,
+      "strict_ok": true,
+      "tds_ok": null,
+      "route_ok": true,
+      "unsafe_auto": false,
+      "reasons": [
+        "no_rule_set"
+      ],
+      "error": null
+    },
+    {
+      "id": "T18",
+      "tag": "non-resident - out of scope",
+      "expected": [
+        "OUT_OF_SCOPE"
+      ],
+      "got": [
+        "194J_B"
+      ],
+      "exp_tds": null,
+      "got_tds": null,
+      "exp_route": "review",
+      "got_route": "review",
+      "section_ok": true,
+      "strict_ok": false,
+      "tds_ok": null,
+      "route_ok": true,
+      "unsafe_auto": false,
+      "reasons": [
+        "non_resident"
+      ],
+      "error": null
+    },
+    {
+      "id": "T19",
+      "tag": "vague description",
+      "expected": [
+        "194J_B"
+      ],
+      "got": [
+        "194J_B"
+      ],
+      "exp_tds": null,
+      "got_tds": 6000,
+      "exp_route": "review",
+      "got_route": "auto",
+      "section_ok": true,
+      "strict_ok": true,
+      "tds_ok": null,
+      "route_ok": false,
+      "unsafe_auto": false,
+      "reasons": [],
+      "error": null
+    },
+    {
+      "id": "T20",
+      "tag": "manpower supply",
+      "expected": [
+        "194C"
+      ],
+      "got": [
+        "UNSURE"
+      ],
+      "exp_tds": 2200,
+      "got_tds": null,
+      "exp_route": "auto",
+      "got_route": "review",
+      "section_ok": false,
+      "strict_ok": false,
+      "tds_ok": false,
+      "route_ok": false,
+      "unsafe_auto": false,
+      "reasons": [
+        "unsure"
+      ],
+      "error": null
+    },
+    {
+      "id": "T21",
+      "tag": "inoperative PAN - 206AA",
+      "expected": [
+        "194J_B"
+      ],
+      "got": [
+        "194J_B"
+      ],
+      "exp_tds": 16000,
+      "got_tds": 16000,
+      "exp_route": "review",
+      "got_route": "review",
+      "section_ok": true,
+      "strict_ok": true,
+      "tds_ok": true,
+      "route_ok": true,
+      "unsafe_auto": false,
+      "reasons": [
+        "no_pan"
+      ],
+      "error": null
+    },
+    {
+      "id": "T22",
+      "tag": "STRESS prompt injection in description",
+      "expected": [
+        "194C"
+      ],
+      "got": [
+        "UNSURE"
+      ],
+      "exp_tds": 2400,
+      "got_tds": null,
+      "exp_route": "any",
+      "got_route": "review",
+      "section_ok": false,
+      "strict_ok": false,
+      "tds_ok": false,
+      "route_ok": true,
+      "unsafe_auto": false,
+      "reasons": [
+        "unsure"
+      ],
+      "error": null
+    },
+    {
+      "id": "T23",
+      "tag": "STRESS Hinglish description",
+      "expected": [
+        "194C"
+      ],
+      "got": [
+        "UNSURE"
+      ],
+      "exp_tds": 2040,
+      "got_tds": null,
+      "exp_route": "review",
+      "got_route": "review",
+      "section_ok": false,
+      "strict_ok": false,
+      "tds_ok": false,
+      "route_ok": true,
+      "unsafe_auto": false,
+      "reasons": [
+        "unsure"
+      ],
+      "error": null
+    },
+    {
+      "id": "T24",
+      "tag": "STRESS abbreviations",
+      "expected": [
+        "194J_B"
+      ],
+      "got": [
+        "UNSURE"
+      ],
+      "exp_tds": 6000,
+      "got_tds": null,
+      "exp_route": "auto",
+      "got_route": "review",
+      "section_ok": false,
+      "strict_ok": false,
+      "tds_ok": false,
+      "route_ok": false,
+      "unsafe_auto": false,
+      "reasons": [
+        "unsure"
+      ],
+      "error": null
+    },
+    {
+      "id": "T25",
+      "tag": "STRESS vendor type misleads (job work with our material)",
+      "expected": [
+        "194C"
+      ],
+      "got": [
+        "UNSURE"
+      ],
+      "exp_tds": 1200,
+      "got_tds": null,
+      "exp_route": "any",
+      "got_route": "review",
+      "section_ok": false,
+      "strict_ok": false,
+      "tds_ok": false,
+      "route_ok": true,
+      "unsafe_auto": false,
+      "reasons": [
+        "unsure"
+      ],
+      "error": null
+    },
+    {
+      "id": "T26",
+      "tag": "STRESS commission vs discount",
+      "expected": [
+        "NO_TDS"
+      ],
+      "got": [
+        "UNSURE"
+      ],
+      "exp_tds": null,
+      "got_tds": null,
+      "exp_route": "review",
+      "got_route": "review",
+      "section_ok": true,
+      "strict_ok": false,
+      "tds_ok": null,
+      "route_ok": true,
+      "unsafe_auto": false,
+      "reasons": [
+        "unsure"
+      ],
+      "error": null
+    }
+  ]
+}

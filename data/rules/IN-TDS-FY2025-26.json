@@ -1,0 +1,72 @@
+{
+  "rule_set_id": "IN-TDS-FY2025-26-v1",
+  "jurisdiction": "India - payments to RESIDENT payees only",
+  "law_basis": "Income-tax Act, 1961 as amended by Finance (No.2) Act 2024 and Finance Act 2025",
+  "valid_from": "2025-04-01",
+  "valid_to": "2026-03-31",
+  "status": "PROTOTYPE - rates and thresholds transcribed by hand; verify against official text before any real use",
+  "rounding": "nearest_rupee",
+  "no_pan_rule": {
+    "section": "206AA",
+    "min_rate": 20.0,
+    "note": "If PAN is not furnished or is inoperative, deduct at the higher of the section rate and 20%."
+  },
+  "high_value_review_threshold": 1000000,
+  "sections": {
+    "194C": {
+      "title": "Payment to contractors (work contracts)",
+      "rates": {"individual": 1.0, "huf": 1.0, "default": 2.0},
+      "threshold": {"type": "single_or_aggregate", "single": 30000, "aggregate": 100000},
+      "transporter_exemption": true,
+      "kb_refs": ["kb-194C-scope", "kb-194C-rate"],
+      "new_act_ref": "Income-tax Act 2025, s.393 table (entry to be verified)"
+    },
+    "194H": {
+      "title": "Commission or brokerage",
+      "rates": {"default": 2.0},
+      "threshold": {"type": "aggregate", "aggregate": 20000},
+      "kb_refs": ["kb-194H"],
+      "new_act_ref": "Income-tax Act 2025, s.393 table (entry to be verified)"
+    },
+    "194I_A": {
+      "title": "Rent - plant, machinery or equipment",
+      "rates": {"default": 2.0},
+      "threshold": {"type": "monthly", "monthly": 50000},
+      "kb_refs": ["kb-194I"],
+      "new_act_ref": "Income-tax Act 2025, s.393 table (entry to be verified)"
+    },
+    "194I_B": {
+      "title": "Rent - land, building (incl. factory), furniture or fittings",
+      "rates": {"default": 10.0},
+      "threshold": {"type": "monthly", "monthly": 50000},
+      "kb_refs": ["kb-194I"],
+      "new_act_ref": "Income-tax Act 2025, s.393 table (entry to be verified)"
+    },
+    "194J_A": {
+      "title": "Fees for technical services (not professional services), call centre, royalty for sale/distribution/exhibition of films",
+      "rates": {"default": 2.0},
+      "threshold": {"type": "aggregate", "aggregate": 50000},
+      "kb_refs": ["kb-194J-fts", "kb-194J-threshold"],
+      "new_act_ref": "Income-tax Act 2025, s.393 table (entry to be verified)"
+    },
+    "194J_B": {
+      "title": "Fees for professional services, other royalty, non-compete fees",
+      "rates": {"default": 10.0},
+      "threshold": {"type": "aggregate", "aggregate": 50000},
+      "kb_refs": ["kb-194J-prof", "kb-194J-threshold"],
+      "new_act_ref": "Income-tax Act 2025, s.393 table (entry to be verified)"
+    },
+    "194J_DIRECTOR": {
+      "title": "Remuneration, fees or commission to a director (other than salary)",
+      "rates": {"default": 10.0},
+      "threshold": {"type": "none"},
+      "kb_refs": ["kb-194J-director"],
+      "new_act_ref": "Income-tax Act 2025, s.393 table (entry to be verified)"
+    }
+  },
+  "non_tds_codes": {
+    "NO_TDS": "Payment is not covered by any in-scope TDS section (e.g. purchase of goods, utility bills)",
+    "OUT_OF_SCOPE": "Payment may attract TDS under a section this prototype does not handle (salary, non-resident, interest, 194Q, 194-IA, 194-IB, 194-O ...)",
+    "UNSURE": "The model cannot decide from the sources provided; a human must classify"
+  }
+}
