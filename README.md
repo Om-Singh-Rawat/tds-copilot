@@ -13,6 +13,8 @@ For every vendor payment, an Indian accounts team must decide **which TDS sectio
 
 ## The design in one picture
 
+![Architecture: where the AI, the code and the human each act](docs/architecture.svg)
+
 ```
 invoice lines (ERP) + vendor master + payment ledger
    │

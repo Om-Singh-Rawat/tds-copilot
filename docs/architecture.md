@@ -1,5 +1,7 @@
 # Architecture
 
+![Architecture: where the AI, the code and the human each act](architecture.svg)
+
 ## Flow for one invoice
 
 ```mermaid

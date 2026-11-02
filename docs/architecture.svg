@@ -1,0 +1,120 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1040 470" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="11">
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#444"/>
+    </marker>
+    <style>
+      .lane{fill:#fafafa;stroke:#ddd}
+      .lab{font-weight:700;font-size:12px;fill:#333}
+      .sub{font-size:9.5px;fill:#666}
+      .data{fill:#eef0f3;stroke:#8a94a3}
+      .code{fill:#e6efff;stroke:#3b6fd8}
+      .ai{fill:#f1e8ff;stroke:#8250df}
+      .hum{fill:#e5f6ea;stroke:#1f8a4c}
+      .t{font-weight:600;fill:#1d2330}
+      .s{font-size:9.5px;fill:#3d4452}
+      .ln{stroke:#444;stroke-width:1.3;fill:none;marker-end:url(#a)}
+      .dash{stroke:#1f8a4c;stroke-width:1.3;fill:none;stroke-dasharray:4 3;marker-end:url(#a)}
+      .lt{font-size:9.5px;fill:#444;font-style:italic}
+    </style>
+  </defs>
+
+  <!-- lanes -->
+  <rect class="lane" x="5" y="20" width="1030" height="80" rx="6"/>
+  <rect class="lane" x="5" y="108" width="1030" height="84" rx="6"/>
+  <rect class="lane" x="5" y="200" width="1030" height="104" rx="6"/>
+  <rect class="lane" x="5" y="312" width="1030" height="112" rx="6"/>
+  <text class="lab" x="14" y="52">DATA</text><text class="sub" x="14" y="66">versioned files,</text><text class="sub" x="14" y="78">master data</text>
+  <text class="lab" x="14" y="142">AI</text><text class="sub" x="14" y="156">probabilistic:</text><text class="sub" x="14" y="168">reads text only</text>
+  <text class="lab" x="14" y="242">CODE</text><text class="sub" x="14" y="256">deterministic,</text><text class="sub" x="14" y="268">exact, auditable</text>
+  <text class="lab" x="14" y="356">HUMAN</text><text class="sub" x="14" y="370">accountable</text><text class="sub" x="14" y="382">decisions</text>
+
+  <!-- data -->
+  <rect class="data" x="125" y="35" width="105" height="50" rx="5"/>
+  <text class="t" x="177" y="56" text-anchor="middle">ERP invoice</text><text class="s" x="177" y="70" text-anchor="middle">lines, amounts, date</text>
+  <rect class="data" x="240" y="35" width="105" height="50" rx="5"/>
+  <text class="t" x="292" y="56" text-anchor="middle">Rule files</text><text class="s" x="292" y="70" text-anchor="middle">rates · valid_from/to</text>
+  <rect class="data" x="360" y="35" width="120" height="50" rx="5"/>
+  <text class="t" x="420" y="56" text-anchor="middle">Knowledge base</text><text class="s" x="420" y="70" text-anchor="middle">Act + circulars, cited</text>
+  <rect class="data" x="620" y="35" width="110" height="50" rx="5"/>
+  <text class="t" x="675" y="56" text-anchor="middle">Vendor master</text><text class="s" x="675" y="70" text-anchor="middle">PAN · residency</text>
+  <rect class="data" x="745" y="35" width="110" height="50" rx="5"/>
+  <text class="t" x="800" y="56" text-anchor="middle">Payment ledger</text><text class="s" x="800" y="70" text-anchor="middle">FY history</text>
+
+  <!-- AI -->
+  <rect class="ai" x="455" y="120" width="185" height="62" rx="6"/>
+  <text class="t" x="547" y="139" text-anchor="middle">LLM classifier</text>
+  <text class="s" x="547" y="153" text-anchor="middle">one closed code per line</text>
+  <text class="s" x="547" y="165" text-anchor="middle">+ cited source ids + flags</text>
+  <text class="s" x="547" y="177" text-anchor="middle">never amounts or rates</text>
+
+  <!-- code -->
+  <rect class="code" x="125" y="222" width="95" height="58" rx="5"/>
+  <text class="t" x="172" y="246" text-anchor="middle">Validate</text><text class="s" x="172" y="260" text-anchor="middle">schema, size</text>
+  <rect class="code" x="235" y="222" width="110" height="58" rx="5"/>
+  <text class="t" x="290" y="243" text-anchor="middle">Rule set</text><text class="s" x="290" y="257" text-anchor="middle">for payment date</text><text class="s" x="290" y="269" text-anchor="middle">none → not computed</text>
+  <rect class="code" x="360" y="222" width="120" height="58" rx="5"/>
+  <text class="t" x="420" y="243" text-anchor="middle">Retrieval</text><text class="s" x="420" y="257" text-anchor="middle">pinned definitions</text><text class="s" x="420" y="269" text-anchor="middle">+ BM25 top-k</text>
+  <rect class="code" x="545" y="222" width="130" height="58" rx="5"/>
+  <text class="t" x="610" y="240" text-anchor="middle">Guardrails</text><text class="s" x="610" y="253" text-anchor="middle">citation retrieved AND</text><text class="s" x="610" y="264" text-anchor="middle">supports code · keyword</text><text class="s" x="610" y="275" text-anchor="middle">cross-check · majority vote</text>
+  <rect class="code" x="690" y="222" width="115" height="58" rx="5"/>
+  <text class="t" x="747" y="240" text-anchor="middle">TDS engine</text><text class="s" x="747" y="253" text-anchor="middle">GST excl · thresholds</text><text class="s" x="747" y="264" text-anchor="middle">catch-up · PAN rate</text><text class="s" x="747" y="275" text-anchor="middle">206AA · Decimal</text>
+  <rect class="code" x="820" y="222" width="95" height="58" rx="5"/>
+  <text class="t" x="867" y="243" text-anchor="middle">Router</text><text class="s" x="867" y="257" text-anchor="middle">15 named</text><text class="s" x="867" y="269" text-anchor="middle">review reasons</text>
+  <rect class="code" x="930" y="222" width="98" height="58" rx="5"/>
+  <text class="t" x="979" y="243" text-anchor="middle">Audit log</text><text class="s" x="979" y="257" text-anchor="middle">input · sources ·</text><text class="s" x="979" y="269" text-anchor="middle">model · versions</text>
+
+  <!-- human -->
+  <rect class="hum" x="235" y="332" width="245" height="72" rx="6"/>
+  <text class="t" x="357" y="354" text-anchor="middle">Practitioner (CA)</text>
+  <text class="s" x="357" y="369" text-anchor="middle">signs off each rule-set and KB version</text>
+  <text class="s" x="357" y="382" text-anchor="middle">before it is used; old versions archived</text>
+  <rect class="hum" x="560" y="332" width="215" height="72" rx="6"/>
+  <text class="t" x="667" y="354" text-anchor="middle">Reviewer queue</text>
+  <text class="s" x="667" y="369" text-anchor="middle">sees reasons, sources, calc steps;</text>
+  <text class="s" x="667" y="382" text-anchor="middle">overrides section → engine recomputes</text>
+  <text class="s" x="667" y="395" text-anchor="middle">decision logged with name</text>
+  <rect class="hum" x="790" y="332" width="150" height="72" rx="6"/>
+  <text class="t" x="865" y="354" text-anchor="middle">Accountant</text>
+  <text class="s" x="865" y="369" text-anchor="middle">batch-approves</text>
+  <text class="s" x="865" y="382" text-anchor="middle">AUTO suggestions;</text>
+  <text class="s" x="865" y="395" text-anchor="middle">liable for the filing</text>
+
+  <!-- arrows: data -> code -->
+  <path class="ln" d="M177,85 V220"/>
+  <path class="ln" d="M292,85 V220"/>
+  <path class="ln" d="M405,85 V220"/>
+  <path class="ln" d="M675,85 L735,220"/>
+  <path class="ln" d="M800,85 L770,220"/>
+  <!-- code chain -->
+  <path class="ln" d="M220,251 H233"/>
+  <path class="ln" d="M345,251 H358"/>
+  <path class="ln" d="M440,222 V151 H453"/>
+  <path class="ln" d="M640,151 H660 V215 L655,220"/>
+  <path class="ln" d="M675,251 H688"/>
+  <path class="ln" d="M805,251 H818"/>
+  <path class="ln" d="M915,251 H928"/>
+  <text class="lt" x="446" y="205">sources</text>
+  <text class="lt" x="665" y="196">codes + citations</text>
+  <!-- router -> humans -->
+  <path class="ln" d="M850,280 L700,330"/>
+  <text class="lt" x="745" y="300">review</text>
+  <path class="ln" d="M880,280 L870,330"/>
+  <text class="lt" x="878" y="310">auto</text>
+  <path class="ln" d="M625,332 L725,282"/>
+  <text class="lt" x="610" y="304">override</text>
+  <path class="ln" d="M940,368 H985 V282"/>
+  <!-- practitioner -> versions -->
+  <path class="dash" d="M300,332 V282"/>
+  <path class="dash" d="M420,332 V282"/>
+  <text class="lt" x="305" y="316" fill="#1f8a4c">approves versions</text>
+
+  <!-- legend -->
+  <g transform="translate(125,440)">
+    <rect class="data" width="14" height="12" rx="2"/><text x="20" y="10">data</text>
+    <rect class="ai" x="70" width="14" height="12" rx="2"/><text x="90" y="10">AI (probabilistic)</text>
+    <rect class="code" x="200" width="14" height="12" rx="2"/><text x="220" y="10">code (exact, re-runnable)</text>
+    <rect class="hum" x="370" width="14" height="12" rx="2"/><text x="390" y="10">human (accountable)</text>
+    <text x="525" y="10" fill="#666">Uncleared items (no PAN, grey area, API error …) → reviewer</text>
+  </g>
+</svg>
