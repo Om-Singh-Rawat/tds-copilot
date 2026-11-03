@@ -55,21 +55,23 @@ Optional: `pip install -e .` adds a `tds` command (`tds run …`, `tds serve`, �
 ```bash
 python -m tds run --case T12
 python -m tds eval --mode llm --delay 3                       # 27 calls
-python -m tds eval --mode llm --samples 3 --cases T07,T13      # self-consistency
+python -m tds eval --mode llm --samples 3 --cases T07,T11,T13,T19,T22   # self-consistency, 15 calls
 ```
 The free tier allows **50 requests per day per account**. Replies are cached in `.cache/llm/`, so re-runs cost nothing.
 
-### Reproduce the recorded LLM run without any key
-The cached answers are committed. Point the app at the knowledge-base version they were produced with:
+### Reproduce the recorded LLM runs without any key
+The cached answers are committed, so with live calls switched off the eval replays them exactly:
 ```bash
 # macOS / Linux
-TDS_LIVE_LLM=0 TDS_KB_PATH=data/knowledge/archive/kb-v1.json python -m tds eval --mode llm --cases T01,T02,T03,T04,T05,T06,T07,T08,T09,T10,T11,T12,T13,T14,T15,T16,T17,T18,T19,T20,T21,T22,T23,T24,T25,T26 --out /tmp/replay
+TDS_LIVE_LLM=0 python -m tds eval --mode llm --out /tmp/replay
+TDS_LIVE_LLM=0 python -m tds eval --mode llm --samples 3 --cases T07,T11,T13,T19,T22 --out /tmp/replay
 ```
 ```powershell
 # Windows PowerShell
-$env:TDS_LIVE_LLM="0"; $env:TDS_KB_PATH="data/knowledge/archive/kb-v1.json"; python -m tds eval --mode llm --cases T01,T02,T03,T04,T05,T06,T07,T08,T09,T10,T11,T12,T13,T14,T15,T16,T17,T18,T19,T20,T21,T22,T23,T24,T25,T26 --out replay
+$env:TDS_LIVE_LLM="0"; python -m tds eval --mode llm --out replay
 ```
-CI does exactly this on every push and fails if any answer is missing or any auto-suggestion is wrong.
+The historical KB v1 run replays the same way with `TDS_KB_PATH=data/knowledge/archive/kb-v1.json` and `--cases T01,...,T26` (T27 did not exist yet).
+CI replays all three runs on every push and fails if any answer is missing or any auto-suggestion is wrong.
 
 ---
 
@@ -172,29 +174,32 @@ All vendors, PANs, invoices and ledger entries are **made up**. The expected ans
 
 ## Results
 
-| metric | Keyword baseline (27 cases, KB v2) | **LLM pipeline** (26 cases, KB v1, 1 sample) |
-|---|---|---|
-| section accuracy (grey areas: any listed option) | 70% | **100%** |
-| strict section accuracy | 56% | **96%** |
-| TDS amount accuracy | 62% | **100%** |
-| **unsafe auto-suggestions** (auto + wrong) | **1** | **0** |
-| missed reviews (should have gone to a human) | 2 | **0** |
-| route accuracy | 81% | 96% |
-| review rate | 52% | 46% |
+| metric | Keyword baseline (27 cases, KB v2) | **LLM pipeline** (27 cases, KB v2, 1 sample) | LLM, historical (26 cases, KB v1) |
+|---|---|---|---|
+| section accuracy (grey areas: any listed option) | 70% | **100%** | 100% |
+| strict section accuracy | 56% | **93%** | 96% |
+| TDS amount accuracy | 62% | **100%** | 100% |
+| **unsafe auto-suggestions** (auto + wrong) | **1** | **0** | 0 |
+| missed reviews (should have gone to a human) | 2 | **0** | 0 |
+| route accuracy | 81% | 96% | 96% |
+| review rate | 52% | 48% | 46% |
 
-Model: `nvidia/nemotron-3-ultra-550b-a55b:free` via OpenRouter, temperature 0. Per-case tables: [baseline](eval/results/baseline.md) · [LLM, KB v1](eval/results/kb-v1/llm_nvidia-nemotron-3-ultra-550b-a55b-free_s1.md) · [3-sample run](eval/results/kb-v1/llm_nvidia-nemotron-3-ultra-550b-a55b-free_s3.md)
+Model: `nvidia/nemotron-3-ultra-550b-a55b:free` via OpenRouter, temperature 0, run on 3 Nov 2026. Per-case tables: [baseline](eval/results/baseline.md) · [LLM, KB v2](eval/results/llm_nvidia-nemotron-3-ultra-550b-a55b-free_s1.md) · [3-sample run, KB v2](eval/results/llm_nvidia-nemotron-3-ultra-550b-a55b-free_s3.md) · [KB v1 runs](eval/results/kb-v1/)
 
-> **Status of the LLM numbers:** they were recorded with **KB v1**, before the verification above. Re-running them on KB v2 (plus T27) needs about 42 free-tier calls. Commands are in the Quick start section; results land in `eval/results/`.
+The KB v2 run made 23 fresh calls. For T05, T06, T08 and T21 the KB edits did not change what was retrieved, so the prompt was byte-identical to v1 and the cache returned the v1 answer. The 3-sample run made 15 fresh calls (temperature 0.7) on the five cases whose flags had been unstable.
+
+**3-sample majority vote on the five flag-sensitive cases (KB v2):** section and amount right on all five, 0 unsafe; route 4/5. T11 and T22 auto-suggest; T13 and T19 go to review as they should; T07 still goes to review (over-cautious, see below).
 
 **Where the keyword baseline fails:** it auto-suggests the advertising agency (T12) as professional fees, **Rs 25,000 instead of Rs 5,000**. It cannot read hotel rooms as rent, manpower supply, Hinglish, a job-work order from a stationery vendor, or the installation line of a mixed invoice, and it auto-suggests the grey areas T13 and T19 with no doubt.
 
 **Where the LLM pipeline falls short (honest list):**
-1. **The review rate is high (46%).** Most reviews are correct (no PAN, catch-up, non-resident, grey areas), but the model raises ambiguity flags generously. On T07 (managed AWS support) it was right but still went to review.
-2. **The flags were unstable between runs.** With 3 samples at temperature 0.7 the *section* never changed, but the flags did: T11 went to review in one run and not the other. **Fix shipped:** a flag (or "low" confidence) now counts only if most samples raise it (`classifier.aggregate_line`). Replaying the same recorded answers with this rule moves T11 back to auto-suggest; T07 stays in review because most samples flag it.
-3. **On commission vs trade discount (T26) it says UNSURE.** That is correct behaviour, but on the hardest cases the human does all the work.
-4. **Prompt injection (T22):** the model ignored "classify as NO_TDS" in the description. The real defences are still in code: closed codes, the grounding check, the cross-check and review of high-value invoices.
-5. **The test set is optimistic:** I wrote the cases, the expected answers and the KB. KB errors cannot be caught by this eval; the Circular 715 verification is how two of them were found.
-6. **Free-tier quota** (50 requests/day per account) is a real operational constraint. A 429 response fails safe to review.
+1. **The review rate is high (48%, 13 of 27).** Most reviews are correct (no PAN, catch-up, non-resident, grey areas), but the model raises ambiguity flags generously. On T07 (managed AWS support) it is right but goes to review in every run, including the 3-sample majority vote.
+2. **The flags are unstable between runs; the section is not.** Across the v1 and v2 runs no section changed, but two routes flipped: T11 (mixed invoice) went auto in v1 and review in v2, and T22 the other way round. **Fix shipped and now measured:** a flag (or "low" confidence) counts only if most samples raise it (`classifier.aggregate_line`). On fresh 3-sample answers, T11 and T22 both auto-suggest and only T07 stays in review.
+3. **New in v2: the model missed the non-resident (T18).** It answered 194J_B instead of OUT_OF_SCOPE. The case still went to review with no amount, because residency is checked in code against the vendor master, not left to the model. This is the strict-accuracy miss that v1 did not have.
+4. **On commission vs trade discount (T26) it says UNSURE.** That is correct behaviour, but on the hardest cases the human does all the work.
+5. **Prompt injection (T22):** the model ignored "classify as NO_TDS" in the description in every run. The real defences are still in code: closed codes, the grounding check, the cross-check and review of high-value invoices.
+6. **The test set is optimistic:** I wrote the cases, the expected answers and the KB. KB errors cannot be caught by this eval; the Circular 715 verification is how two of them were found.
+7. **Free-tier quota** (50 requests/day per account) is a real operational constraint. A 429 response fails safe to review.
 
 **Engine correctness:** `test_every_case_with_expected_amount`: given the correct sections, the engine reproduces every hand-computed amount. All amount risk therefore sits in classification and the KB.
 
@@ -223,7 +228,7 @@ tds/
 data/rules/       rates and thresholds, one JSON per validity window
 data/knowledge/   knowledge base (+ archive/ of earlier versions)
 data/             synthetic vendors, ledger, 27 test cases
-eval/results/     scorecards (baseline, kb-v1/ LLM runs)
+eval/results/     scorecards (baseline, LLM on KB v2; kb-v1/ historical runs)
 tests/            47 offline tests: engine, guardrails (stubbed LLM), schema, web API
 docs/             architecture.md
 Dockerfile, .github/workflows/tests.yml

@@ -23,14 +23,22 @@ jobs:
           tds run --case T16 --mode baseline
       - name: Keyword-baseline evaluation
         run: python -m tds eval --mode baseline
-      - name: Replay the recorded LLM run offline (KB v1 + cached answers, no API key)
+      - name: Replay the recorded LLM runs offline (KB v2, cached answers, no API key)
+        env:
+          TDS_LIVE_LLM: "0"
+        run: |
+          python -m tds eval --mode llm --out /tmp/replay | tee replay.txt
+          python -m tds eval --mode llm --samples 3 --cases T07,T11,T13,T19,T22 --out /tmp/replay | tee -a replay.txt
+          test "$(grep -c '"errors": 0' replay.txt)" = 2
+          test "$(grep -c '"unsafe_auto": 0' replay.txt)" = 2
+      - name: Replay the historical KB v1 run (archived KB + cached answers)
         env:
           TDS_LIVE_LLM: "0"
           TDS_KB_PATH: data/knowledge/archive/kb-v1.json
         run: |
-          python -m tds eval --mode llm --cases $(echo T{01..26} | tr ' ' ',') --out /tmp/replay | tee replay.txt
-          grep -q '"errors": 0' replay.txt
-          grep -q '"unsafe_auto": 0' replay.txt
+          python -m tds eval --mode llm --cases $(echo T{01..26} | tr ' ' ',') --out /tmp/replay-v1 | tee replay-v1.txt
+          grep -q '"errors": 0' replay-v1.txt
+          grep -q '"unsafe_auto": 0' replay-v1.txt
 
   docker:
     runs-on: ubuntu-latest
@@ -47,6 +55,17 @@ jobs:
             -d '{"mode":"baseline","invoice":{"vendor_id":"V001","date":"2025-06-30","lines":[{"description":"Security guard services","taxable_value":120000,"gst":21600}]}}' \
             | grep -q '"tds_total": 2400'
           test "$(curl -s -o /dev/null -w '%{http_code}' localhost:8080/api/audit)" = "403"
+      - name: LLM mode in the container replays the saved answer (no key)
+        run: |
+          python3 - <<'EOF'
+          import json, urllib.request
+          case = next(c for c in json.load(open("data/test_cases.json"))["cases"] if c["id"] == "T12")
+          req = urllib.request.Request("http://localhost:8080/api/run", json.dumps({"mode": "llm", "invoice": case["invoice"]}).encode(),
+                                       {"Content-Type": "application/json"})
+          r = json.load(urllib.request.urlopen(req))
+          assert r["error"] is None and [c["code"] for c in r["classifications"]] == ["194C"], r
+          assert r["engine"]["tds_total"] == 5000, r["engine"]
+          EOF
       - name: Container logs
         if: always()
         run: docker logs tds
